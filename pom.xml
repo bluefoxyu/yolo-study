@@ -12,6 +12,7 @@
         <module>predict-test</module>
         <module>CameraDetection</module>
         <module>yolo-common</module>
+        <module>CameraDetectionWarn</module>
     </modules>
 
     <properties>

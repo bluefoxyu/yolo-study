@@ -89,7 +89,7 @@ public class CameraDetection {
         //可以把识别后的视频在通过rtmp转发到其他流媒体服务器，就可以远程预览视频后视频，需要使用ffmpeg将连续图片合成flv 等等，很简单。
         if (!video.isOpened()) {
             System.err.println("打开视频流失败,未检测到监控,请先用vlc软件测试链接是否可以播放！,下面试用默认测试视频进行预览效果！");
-            video.open("video/car3.mp4");
+            video.open("./yolo-common/src/main/java/com/bluefoxyu/video/car3.mp4");
         }
 
         // 在这里先定义下框的粗细、字的大小、字的类型、字的颜色(按比例设置大小粗细比较好一些)

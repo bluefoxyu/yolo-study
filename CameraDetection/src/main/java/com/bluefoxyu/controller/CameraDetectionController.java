@@ -26,20 +26,16 @@ import java.util.HashMap;
 
 /**
  * 摄像头识别，这是yolov7的视频识别例子，v5和v8的根据下面的思路，将其他文件中的代码复制过来即可
- * 视频帧率15最佳，20也可以，不建议30，分辨率640最佳，720也可以。不建议1080，码率不要超过2048，1024最佳
+ * 视频帧率15最佳，20也可以，不建议30，分辨率640最佳，720也可以。不建议1080，码率不要超过2048，1024最佳。可在摄像头自带的管理页面中设备，主码流和子码流
  */
-
 @RestController
 @RequestMapping("/camera")
 public class CameraDetectionController {
 
     // 用于停止检测
+    //volatile关键字保证了多线程环境下的可见性，确保所有线程看到这个变量的值是一致的，即当一个线程修改了 volatile 变量的值，这个新值对于其他线程来说是立即可见的
     private static volatile boolean stopRequested = false;
     private static volatile boolean startRequested = false;
-
-    // 视频帧率15最佳，20也可以，不建议30，分辨率640最佳，720也可以。不建议1080，码率不要超过2048，1024最佳 。可在摄像头自带的管理页面中设备，主码流和子码流
-
-    //java -Djava.awt.headless=false -jar CameraDetectionApplication.jar
 
     //摄像头检测
     @PostMapping("/detect")
@@ -103,7 +99,7 @@ public class CameraDetectionController {
         //可以把识别后的视频在通过rtmp转发到其他流媒体服务器，就可以远程预览视频后视频，需要使用ffmpeg将连续图片合成flv 等等，很简单。
         if (!video.isOpened()) {
             System.err.println("打开视频流失败,未检测到监控,请先用vlc软件测试链接是否可以播放！,下面试用默认测试视频进行预览效果！");
-            video.open("video/car3.mp4");
+            video.open("./yolo-common/src/main/java/com/bluefoxyu/video/car3.mp4");
         }
 
         // 在这里先定义下框的粗细、字的大小、字的类型、字的颜色(按比例设置大小粗细比较好一些)
