@@ -44,6 +44,7 @@ public class CameraDetectionWarnDemo {
         String OS = System.getProperty("os.name").toLowerCase();
         if (OS.contains("win")) {
             System.load(ClassLoader.getSystemResource("lib/opencv_videoio_ffmpeg470_64.dll").getPath());
+
         }
         String model_path = "./CameraDetectionWarn/src/main/resources/model/yolov7-tiny.onnx";
 

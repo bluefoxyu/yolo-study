@@ -13,6 +13,8 @@
         <module>CameraDetection</module>
         <module>yolo-common</module>
         <module>CameraDetectionWarn</module>
+        <module>PlateDetection</module>
+        <module>dp</module>
     </modules>
 
     <properties>
