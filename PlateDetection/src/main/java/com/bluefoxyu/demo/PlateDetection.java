@@ -42,7 +42,8 @@ public class PlateDetection {
     }
 
     final static String[] PLATE_COLOR = new String[]{"黑牌", "蓝牌", "绿牌", "白牌", "黄牌"};
-    final static String PLATE_NAME= "#京沪津渝冀晋蒙辽吉黑苏浙皖闽赣鲁豫鄂湘粤桂琼川贵云藏陕甘青宁新学警港澳挂使领民航危0123456789ABCDEFGHJKLMNPQRSTUVWXYZ险品";
+    final static String PLATE_NAME= "#京沪津渝冀晋蒙辽" +
+            "吉黑苏浙皖闽赣鲁豫鄂湘粤桂琼川贵云藏陕甘青宁新学警港澳挂使领民航危0123456789ABCDEFGHJKLMNPQRSTUVWXYZ险品";
 
     public static void main(String[] args) throws OrtException {
 
@@ -55,10 +56,19 @@ public class PlateDetection {
         // 要检测的图片所在目录
         String imagePath = "./yolo-common/src/main/java/com/bluefoxyu/carImg";
 
-        // 定义保存目录和文件名
+        // 定义保存目录
         String outputDir = "./PlateDetection/output/";
-        String outputFileName = "temp_output_image.jpg";
-        String outputPath = outputDir + outputFileName;
+
+        // 用于区别后续各个图片的标识
+        int index=0;
+
+        // 创建目录（如果不存在）
+        File directory = new File(outputDir);
+        if (!directory.exists()) {
+            directory.mkdirs();  // 创建目录
+            System.out.println("目录不存在，已创建：" + outputDir);
+        }
+
 
         float confThreshold = 0.35F;
 
@@ -91,6 +101,13 @@ public class PlateDetection {
         ODConfig odConfig = new ODConfig();
         Map<String, String> map = getImagePathMap(imagePath);
         for(String fileName : map.keySet()){
+
+            // 生成输出文件名
+            index++;
+            String outputFileName = "temp_output_image" + "_" + index + ".jpg";
+            String outputPath = outputDir + outputFileName;
+            System.out.println("outputPath = " + outputPath);
+
             String imageFilePath = map.get(fileName);
             System.out.println(imageFilePath);
             // 读取 image
@@ -208,14 +225,8 @@ public class PlateDetection {
                 g2d.setColor(Color.RED);
                 g2d.drawString(PLATE_COLOR[colorRResult[0].intValue()]+"-"+plateNo, (int)((bbox[0]-dw)/ratio), (int)((bbox[1]-dh)/ratio-3)); // 假设的文本位置
                 g2d.dispose();
-                try {
-                    // 创建目录（如果不存在）
-                    File directory = new File(outputDir);
-                    if (!directory.exists()) {
-                        directory.mkdirs();  // 创建目录
-                        System.out.println("目录不存在，已创建：" + outputDir);
-                    }
 
+                try {
                     ImageIO.write(bufferedImage, "jpg", new File(outputPath));
                 } catch (IOException e) {
                     throw new RuntimeException(e);
@@ -227,11 +238,14 @@ public class PlateDetection {
             System.out.println();
 
 
+
             // 弹窗展示图像
             HighGui.imshow("Display Image", Imgcodecs.imread(outputPath));
             // 按任意按键关闭弹窗画面，结束程序
             HighGui.waitKey();
+
         }
+
         HighGui.destroyAllWindows();
         System.exit(0);
 
