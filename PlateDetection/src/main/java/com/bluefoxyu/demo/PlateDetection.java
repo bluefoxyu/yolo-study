@@ -55,6 +55,11 @@ public class PlateDetection {
         // 要检测的图片所在目录
         String imagePath = "./yolo-common/src/main/java/com/bluefoxyu/carImg";
 
+        // 定义保存目录和文件名
+        String outputDir = "./PlateDetection/output/";
+        String outputFileName = "temp_output_image.jpg";
+        String outputPath = outputDir + outputFileName;
+
         float confThreshold = 0.35F;
 
         float nmsThreshold = 0.45F;
@@ -204,7 +209,14 @@ public class PlateDetection {
                 g2d.drawString(PLATE_COLOR[colorRResult[0].intValue()]+"-"+plateNo, (int)((bbox[0]-dw)/ratio), (int)((bbox[1]-dh)/ratio-3)); // 假设的文本位置
                 g2d.dispose();
                 try {
-                    ImageIO.write(bufferedImage, "jpg", new File("temp_output_image.jpg"));
+                    // 创建目录（如果不存在）
+                    File directory = new File(outputDir);
+                    if (!directory.exists()) {
+                        directory.mkdirs();  // 创建目录
+                        System.out.println("目录不存在，已创建：" + outputDir);
+                    }
+
+                    ImageIO.write(bufferedImage, "jpg", new File(outputPath));
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -216,7 +228,7 @@ public class PlateDetection {
 
 
             // 弹窗展示图像
-            HighGui.imshow("Display Image", Imgcodecs.imread("temp_output_image.jpg"));
+            HighGui.imshow("Display Image", Imgcodecs.imread(outputPath));
             // 按任意按键关闭弹窗画面，结束程序
             HighGui.waitKey();
         }
