@@ -1,6 +1,7 @@
 package com.bluefoxyu;
 
 import ai.onnxruntime.OrtException;
+import com.bluefoxyu.model.YoloV8;
 import com.bluefoxyu.model.domain.Onnx;
 import com.bluefoxyu.output.Output;
 import com.bluefoxyu.model.YoloV7;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class Main {
 
-   static String model_path = "./dp/src/main/resources/model/yolov7-tiny.onnx";
+   static String model_path = "./dp/src/main/resources/model/yolov8s.onnx";
 
    static String test_img = "./dp/images/some_people.png";
 
@@ -33,7 +34,8 @@ public class Main {
 
         // 1. 初始化模型
         // 全局new一次即可，千万不要每次使用都new。可以使用@Bean，或者在spring项目启动时初始化一次即可
-        Onnx onnx = new YoloV7(names,model_path,false);
+        Onnx onnx = new YoloV8(names,model_path,false);
+        //Onnx onnx = new YoloV7(names,model_path,false);
         //Onnx onnx = new YoloV5(labels,model_path,false);
 
         // 2. 读取图像
