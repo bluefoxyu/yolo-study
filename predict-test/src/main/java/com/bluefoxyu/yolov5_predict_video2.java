@@ -22,8 +22,6 @@ import java.util.List;
  
 /**
 *   @desc : video 视频 yolov5实时推理, 单线程（无缓冲队列）
-*   @auth : tyf
-*   @date : 2023-09-16  14:37:29
 */
 public class yolov5_predict_video2 {
 

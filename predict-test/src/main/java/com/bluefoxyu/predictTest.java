@@ -17,8 +17,6 @@ import java.util.*;
  
 /**
 *   @desc : 使用 com.microsoft.onnxruntime 加载 yolov5 onnx 进行推理
-*   @auth : tyf
-*   @date : 2023-03-21  09:31:31
 */
 public class predictTest {
     public static OrtEnvironment env;
