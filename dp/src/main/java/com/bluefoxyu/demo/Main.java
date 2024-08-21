@@ -1,10 +1,9 @@
-package com.bluefoxyu;
+package com.bluefoxyu.demo;
 
 import ai.onnxruntime.OrtException;
 import com.bluefoxyu.model.YoloV8;
 import com.bluefoxyu.model.domain.Onnx;
 import com.bluefoxyu.output.Output;
-import com.bluefoxyu.model.YoloV7;
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
 
