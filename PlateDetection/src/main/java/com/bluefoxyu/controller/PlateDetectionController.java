@@ -250,6 +250,7 @@ public class PlateDetectionController {
 
         HighGui.destroyAllWindows();
         //System.exit(0);
+        System.out.println("识别完成，车牌信息："+plateNumberList);
         return plateNumberList;
 
     }

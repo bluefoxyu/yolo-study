@@ -40,6 +40,7 @@ public class CameraDetectionWarnController {
     private static volatile boolean startRequested = false;
 
     // 标准的对象去重或者判断是否为同一个对象避免重复告警应该使用目标跟踪，但是这里使用数量来简易判断，不是标准用法
+
     static Map<String,Integer> last = new ConcurrentHashMap<>();
     static Map<String,Integer> current = new ConcurrentHashMap<>();
 
@@ -72,7 +73,8 @@ public class CameraDetectionWarnController {
                 "teddy bear", "hair drier", "toothbrush"};
 
         // 加载ONNX模型
-        OrtEnvironment environment = OrtEnvironment.getEnvironment();
+        OrtEnvironment environment = OrtEnvironment.getEnvironment()
+                ;
         OrtSession.SessionOptions sessionOptions = new OrtSession.SessionOptions();
 
         // 使用gpu,需要本机按钻过cuda，并修改pom.xml，不安装也能运行本程序

@@ -25,7 +25,6 @@ public class YoloV8 extends Onnx {
 
     @Override
     public List<Output> postprocess(OrtSession.Result result, Mat img) throws OrtException {
-
         float[][] outputData = ((float[][][])result.get(0).getValue())[0];
         outputData = ImageUtil.transposeMatrix(outputData);
         Map<Integer, List<float[]>> class2Bbox = new HashMap<>();

@@ -25,7 +25,8 @@ import java.util.HashMap;
  * 视频帧率15最佳，20也可以，不建议30，分辨率640最佳，720也可以。不建议1080，码率不要超过2048，1024最佳
  */
 
-public class CameraDetection {
+public class
+CameraDetection {
 
     // 视频帧率15最佳，20也可以，不建议30，分辨率640最佳，720也可以。不建议1080，码率不要超过2048，1024最佳 。可在摄像头自带的管理页面中设备，主码流和子码流
     public static void main(String[] args) throws OrtException {

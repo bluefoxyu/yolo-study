@@ -4,3 +4,11 @@ server:
 spring:
   profiles:
     active: dev
+
+logging:
+  level:
+    com:
+      bluefoxyu:
+        mapper: debug
+        service: info
+        controller: info

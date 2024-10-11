@@ -3,6 +3,7 @@ package com.bluefoxyu.model.domain;
 import ai.onnxruntime.*;
 import com.bluefoxyu.output.Output;
 import com.bluefoxyu.utils.ImageUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.opencv.core.*;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
@@ -16,6 +17,7 @@ import java.util.*;
 /**
  * onnx抽象类，没写get 和 set 自己增加
  */
+@Slf4j
 public abstract class Onnx {
 
     protected OrtEnvironment environment;
@@ -55,6 +57,7 @@ public abstract class Onnx {
     并从模型的输入信息中获取张量（Tensor）的类型（如UINT8或FLOAT）。
     同时，为每个分类标签随机生成一个颜色，用于绘制检测框。*/
     public Onnx(String[] labels,String model_path,boolean gpu) throws OrtException {
+        log.info("模型文件到临时路径:{}",model_path);
         nu.pattern.OpenCV.loadLocally();
         this.labels = labels;
         this.gpu = gpu;
